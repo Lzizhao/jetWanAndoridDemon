@@ -1,0 +1,33 @@
+ext {
+    android = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.3",
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    lib_version = [
+            "lifecycle"    : "2.2.0",
+            "constraintlayout"    : '2.0.1'
+    ]
+
+    dependencies = [
+            "lifecycle-extensions" : "androidx.lifecycle:lifecycle-extensions:${lib_version['lifecycle']}",
+            "lifecycle-viewmodel-ktx" : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lib_version['lifecycle']}",
+            "constraintlayout" : "androidx.constraintlayout:constraintlayout:${lib_version['constraintlayout']}"
+    ]
+
+    customDeps = [
+            //底部导航栏 需要material依赖
+            "BottomNavigationViewEx": 'com.github.ittianyu:BottomNavigationViewEx:2.0.4',
+            //fragment管理库
+            "fragmentationx"        : 'me.yokeyword:fragmentationx:1.0.1',
+
+            "multidex"              : "com.android.support:multidex:1.0.3",
+
+            "material"              : 'com.google.android.material:material:1.2.0-alpha01',
+    ]
+    customLibs = customDeps.values()
+}
