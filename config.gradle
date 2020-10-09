@@ -31,6 +31,9 @@ ext {
 
             //recyclerview库
             "yzjrecyclerview"       : 'com.yanzhenjie.recyclerview:x:1.3.2',
+
+            //页面管理框架(加载进度反馈UI)
+            "loadsir"               : 'com.kingja.loadsir:loadsir:1.3.6',
     ]
     customLibs = customDeps.values()
 }
