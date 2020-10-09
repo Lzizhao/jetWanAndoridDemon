@@ -46,6 +46,9 @@ dependencies {
     implementation rootProject.ext.dependencies['constraintlayout']
     implementation rootProject.ext.customLibs
 
+    implementation rootProject.ext.dependencies['glide']
+    annotationProcessor rootProject.ext.dependencies['glide-compiler']
+
 
 
 }
