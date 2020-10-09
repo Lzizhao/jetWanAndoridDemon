@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jpwanandroiddemon.R
-import com.example.jpwanandroiddemon.databinding.HomeFragmentBinding
+import com.example.jpwanandroiddemon.databinding.FragmentHomeBinding
 import com.example.jpwanandroiddemon.ui.main.HomeViewModel
 import me.yokeyword.fragmentation.SupportFragment
 
@@ -22,12 +22,12 @@ class HomeFragment : SupportFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        HomeFragmentBinding.inflate(layoutInflater)
+        FragmentHomeBinding.inflate(layoutInflater)
         // TODO: Use the ViewModel
     }
 
