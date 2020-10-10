@@ -50,6 +50,8 @@ ext {
 
             //轮播图
             "banner"                : 'cn.bingoogolapple:bga-banner:2.2.6@aar',
+            //baseAdapter
+            "baseadapter"           : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46',
 
 
     ]
