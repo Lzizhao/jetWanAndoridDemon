@@ -1,6 +1,8 @@
 package com.example.jpwanandroiddemon.vm
 
-import com.example.jpwanandroiddemon.bean.BannerBean
+import com.example.jpwanandroiddemon.bean.ApiPagerResponse
+import com.example.jpwanandroiddemon.bean.AriticleResponse
+import com.example.jpwanandroiddemon.bean.base.ApiResponse
 import com.example.jpwanandroiddemon.net.SingleHttpServer
 import io.reactivex.android.schedulers.AndroidSchedulers
 
@@ -11,18 +13,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers
  *     desc  :
  * </pre>
  */
-class BannerVM : BaseVM<BannerBean>() {
+class AriticleListVM : BaseVM<ApiResponse<ApiPagerResponse<MutableList<AriticleResponse>>>>() {
 
 
-    fun getBanner() {
+
+    fun getAriticleList(){
         SingleHttpServer.getInstance()
-            .getBanner()
+            .getAritrilList(1)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 setData(it)
             }
     }
-
 
 
 }

@@ -22,6 +22,7 @@ open class BaseVM<T> : ViewModel() {
         mLiveData!!.postValue(data)
     }
 
+
     override fun onCleared() {
         super.onCleared()
     }

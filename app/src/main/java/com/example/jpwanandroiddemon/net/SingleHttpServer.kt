@@ -10,10 +10,12 @@ package com.example.jpwanandroiddemon.net
 class SingleHttpServer private constructor(){
 
     companion object{
-
-
+        var httpServer:HttpServer? = null
         fun getInstance():HttpServer{
-            return HttpConfig.create()
+            if (httpServer==null) {
+                httpServer = HttpConfig.create()
+            }
+            return httpServer!!
         }
     }
 
