@@ -36,6 +36,9 @@ class HomeFragment : SupportFragment() {
             HomeFragment()
     }
 
+    private var mPage = 0
+
+
     private lateinit var mViewModel: HomeViewModel
     private lateinit var mLoadSir: LoadService<Any>
     private lateinit var mBinding: FragmentHomeBinding
@@ -45,7 +48,7 @@ class HomeFragment : SupportFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setHasOptionsMenu(true)//加上这句话，menu才会显示出来
+        setHasOptionsMenu(true)//加上这句话，menu才会显示出来
     }
 
     override fun onCreateView(
@@ -69,20 +72,27 @@ class HomeFragment : SupportFragment() {
         mBannerVM = ViewModelProvider(this).get<BannerVM>(BannerVM::class.java)
         mArticleListVM = ViewModelProvider(this).get<AriticleListVM>(AriticleListVM::class.java)
         initData();
+        initListen();
+    }
+
+    private fun initListen() {
+        mBinding.root.swiperecyclerview.setLoadMoreListener {
+            mArticleListVM.getAriticleList(mPage++)
+        }
     }
 
     private fun initData() {
-        mLoadSir = LoadSir.getDefault().register(
-            mBinding.root.findViewById(R.id.swipeRefreshLayout),
-            Callback.OnReloadListener {
-                mLoadSir.showCallback(LoadingCallback::class.java)
-            })
-        mLoadSir.showCallback(EmptyCallback::class.java)
+//        mLoadSir = LoadSir.getDefault().register(
+//            mBinding.root.findViewById(R.id.swipeRefreshLayout),
+//            Callback.OnReloadListener {
+//                mLoadSir.showCallback(LoadingCallback::class.java)
+//            })
+//        mLoadSir.showCallback(EmptyCallback::class.java)
 
 
         mBannerVM.data.observe(viewLifecycleOwner, Observer {
             if (it.errorCode == 0) {
-                mLoadSir.showSuccess()
+//                mLoadSir.showSuccess()
 //                requestBannerSucces(it.data)
             } else {
                 mLoadSir.showCallback(ErrorCallback::class.java)
@@ -126,7 +136,7 @@ class HomeFragment : SupportFragment() {
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
 //        mBannerVM.getBanner();
-        mArticleListVM.getAriticleList();
+        mArticleListVM.getAriticleList(mPage);
     }
 
 
