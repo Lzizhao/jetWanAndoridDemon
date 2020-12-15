@@ -1,6 +1,9 @@
 package com.example.jpwanandroiddemon.ui
 
 import android.app.Application
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.multidex.MultiDex
 import com.example.jpwanandroiddemon.ui.custom.loadCallBack.EmptyCallback
 import com.example.jpwanandroiddemon.ui.custom.loadCallBack.ErrorCallback
@@ -16,12 +19,16 @@ import com.kingja.loadsir.core.LoadSir
  *     desc  :
  * </pre>
  */
-class JetApp :Application(){
-
+class JetApp :Application(),ViewModelStoreOwner{
+    private lateinit var mAppModelStore: ViewModelStore
+    private var mFactory: ViewModelProvider.Factory? = null
 
     override fun onCreate() {
         super.onCreate()
         MultiDex.install(this)
+
+
+
 
         //界面加载管理 初始化
         LoadSir.beginBuilder()
@@ -32,4 +39,19 @@ class JetApp :Application(){
             .commit()
     }
 
+
+    fun getAppProvider():ViewModelProvider{
+        return ViewModelProvider(this,this.getAppModelFactory())
+    }
+
+    private fun getAppModelFactory(): ViewModelProvider.Factory {
+        if (mFactory == null) {
+            mFactory = ViewModelProvider.AndroidViewModelFactory.getInstance(this)
+        }
+        return mFactory!!
+    }
+
+    override fun getViewModelStore(): ViewModelStore {
+        return mAppModelStore
+    }
 }

@@ -21,8 +21,10 @@ class AriticleListVM : BaseVM<ApiResponse<ApiPagerResponse<MutableList<AriticleR
         SingleHttpServer.getInstance()
             .getAritrilList(page)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe({
                 setData(it)
+            }) {
+
             }
     }
 

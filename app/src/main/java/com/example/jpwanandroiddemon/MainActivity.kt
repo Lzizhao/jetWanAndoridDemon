@@ -1,15 +1,31 @@
 package com.example.jpwanandroiddemon
 
 import android.os.Bundle
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import com.example.jpwanandroiddemon.databinding.MainActivityBinding
+import com.example.jpwanandroiddemon.ui.JetApp
 import com.example.jpwanandroiddemon.ui.fragment.MainFragment
+import com.example.jpwanandroiddemon.utils.StatusBarUtil
+import com.example.jpwanandroiddemon.vm.AppViewModel
 import me.yokeyword.fragmentation.SupportActivity
 
 class MainActivity : SupportActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity) //LZZ issues 不能用databing 找不到R.id.rl
-        initFragment();
+        val inflate = MainActivityBinding.inflate(layoutInflater)
+        setContentView(inflate.root)
+        initStatusBar()
+        initFragment()
+    }
+
+    private fun initStatusBar() {
+
+        val appViewModel = (application as JetApp).getAppProvider().get(AppViewModel::class.java)
+        appViewModel.appStatusColor.observe(this, Observer {
+            StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.colorPrimary),0)
+        })
     }
 
     private fun initFragment() {
