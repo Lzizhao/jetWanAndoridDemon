@@ -20,15 +20,17 @@ import com.kingja.loadsir.core.LoadSir
  * </pre>
  */
 class JetApp :Application(),ViewModelStoreOwner{
-    private lateinit var mAppModelStore: ViewModelStore
     private var mFactory: ViewModelProvider.Factory? = null
+    private lateinit var mAppViewModelStore: ViewModelStore
+    companion object{
+        lateinit var instance: JetApp
+    }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         MultiDex.install(this)
-
-
-
+        mAppViewModelStore = ViewModelStore()
 
         //界面加载管理 初始化
         LoadSir.beginBuilder()
@@ -52,6 +54,7 @@ class JetApp :Application(),ViewModelStoreOwner{
     }
 
     override fun getViewModelStore(): ViewModelStore {
-        return mAppModelStore
+        return mAppViewModelStore
     }
+
 }

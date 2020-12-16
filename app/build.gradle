@@ -49,6 +49,9 @@ dependencies {
     implementation rootProject.ext.dependencies['glide']
     annotationProcessor rootProject.ext.dependencies['glide-compiler']
 
-
+    //可视化数据库
+    debugImplementation ('com.glance.guolindev:glance:1.0.0-alpha01'){
+        exclude group:'androidx.paging',module:'paging-runtime'
+    }
 
 }

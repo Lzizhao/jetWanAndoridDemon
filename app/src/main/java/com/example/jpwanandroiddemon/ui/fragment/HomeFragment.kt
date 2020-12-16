@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,11 +16,13 @@ import com.bumptech.glide.Glide
 import com.example.jpwanandroiddemon.R
 import com.example.jpwanandroiddemon.bean.BannerBean
 import com.example.jpwanandroiddemon.databinding.FragmentHomeBinding
+import com.example.jpwanandroiddemon.ui.JetApp
 import com.example.jpwanandroiddemon.ui.adapter.ArticleAdapter
 import com.example.jpwanandroiddemon.ui.custom.loadCallBack.EmptyCallback
 import com.example.jpwanandroiddemon.ui.custom.loadCallBack.ErrorCallback
 import com.example.jpwanandroiddemon.ui.custom.loadCallBack.LoadingCallback
 import com.example.jpwanandroiddemon.ui.main.HomeViewModel
+import com.example.jpwanandroiddemon.vm.AppViewModel
 import com.example.jpwanandroiddemon.vm.AriticleListVM
 import com.example.jpwanandroiddemon.vm.BannerVM
 import com.kingja.loadsir.callback.Callback
@@ -63,6 +66,9 @@ class HomeFragment : SupportFragment() {
         super.onActivityCreated(savedInstanceState)
         FragmentHomeBinding.inflate(layoutInflater)
 
+
+        val appViewModel = JetApp.instance.getAppProvider().get(AppViewModel::class.java)
+        appViewModel.appStatusColor.value = ContextCompat.getColor(requireActivity(), R.color.white)
 
         mArticleAdapter = ArticleAdapter(mutableListOf())
         mBinding.root.swiperecyclerview.adapter = mArticleAdapter
@@ -135,7 +141,7 @@ class HomeFragment : SupportFragment() {
 
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
-//        mBannerVM.getBanner();
+        mBannerVM.getBanner();
         mArticleListVM.getAriticleList(mPage);
     }
 
